@@ -39,6 +39,7 @@ public class MyArrayList<T extends Comparable<T>> {
         size++;
     }
 
+
     //4*. Добавить метод увеличивающий внутренний массив и сделать рефакторинг методов add(T item ) и add(int index,
     // T item)
     public void incCapacity() {

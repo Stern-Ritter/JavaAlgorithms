@@ -95,7 +95,8 @@ public class Main {
 ////        myArrayList.bubbleSort(Comparator.comparingInt(String::length).thenComparing(String::compareToIgnoreCase));
 //        System.out.println(myArrayList);
 
-     /*   //Задание 1. Создать массив большого размера (миллион элементов).
+
+        //Задание 1. Создать массив большого размера (миллион элементов).
         //Задание 2. Заполнить массив случайными числами.
         MyArrayList<Integer> arrSel= new MyArrayList<>(100000);
         MyArrayList<Integer> arrIns= new MyArrayList<>(100000);
@@ -120,9 +121,10 @@ public class Main {
         System.out.println("Время сортировки вставками: " + (System.currentTimeMillis() - start) + "мс.");
         arrBub.bubbleSort();
         System.out.println("Время пузырьковой сортировки: " + (System.currentTimeMillis() - start) + "мс.");
-        */
 
-        //4*. Добавить метод увеличивающий внутренний массив и сделать рефакторинг методов add(T item ) и add(int index,
+
+
+     //4*. Добавить метод увеличивающий внутренний массив и сделать рефакторинг методов add(T item ) и add(int index,
         // T item)
         MyArrayList<Integer> arr = new MyArrayList<>();
         arr.add(1);
@@ -142,6 +144,7 @@ public class Main {
         arr.add(13);
         System.out.println("Новый размер MyArrayList: " + arr.getCapacity());
         System.out.println(arr);
+
 
         //5**. Реализовать перегруженные версии сортировок, принимающие параметр Comparator
         System.out.println(myArrayList);
