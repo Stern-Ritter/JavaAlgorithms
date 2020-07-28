@@ -1,18 +1,27 @@
 package lesson3;
 
+import java.util.Comparator;
 import java.util.EmptyStackException;
 
 public class MyPriorityQueue<T extends Comparable<T>> {
     private T[] list;
     private int size = 0;
     private final int DEFAULT_CAPACITY = 10;
-
+    private Comparator <T> comparator = Comparator.naturalOrder();
 
     public MyPriorityQueue(int capacity) {
         if (capacity <= 0) {
             throw new IllegalArgumentException("capacity " + capacity);
         }
         list = (T[]) new Comparable[capacity];
+    }
+    // Задание 3*. Добавить возможность передачи Компаратора в конструктор класса приоритетная очередь.
+    public MyPriorityQueue(int capacity, Comparator<T> comparator) {
+        if (capacity <= 0) {
+            throw new IllegalArgumentException("capacity " + capacity);
+        }
+        list = (T[]) new Comparable[capacity];
+        this.comparator = comparator;
     }
 
     public MyPriorityQueue() {
@@ -26,7 +35,7 @@ public class MyPriorityQueue<T extends Comparable<T>> {
         list[size] = item;
         size++;
         int i = size - 1;
-        while (i > 0 && list[i].compareTo(list[i - 1]) > 0) {
+        while (i > 0 && comparator.compare(list[i], list[i - 1]) > 0) {
             swap(i, i - 1);
             i--;
         }

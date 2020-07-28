@@ -19,9 +19,10 @@ public class MyStack<T> {
         list = (T[]) new Object[DEFAULT_CAPACITY];
     }
 
+    //4*. В классе Стек в методе вставки заменить выдачу исключения увеличением внутреннего массива.
     public void push(T item) {
         if (isFull()) {
-            throw new StackOverflowError();
+            reCapacity(size * 2);
         }
         list[size] = item;
         size++;
@@ -44,6 +45,10 @@ public class MyStack<T> {
 
     public int size() {
         return size;
+    }
+
+    public int capacity() {
+        return list.length;
     }
 
     public boolean isEmpty() {
