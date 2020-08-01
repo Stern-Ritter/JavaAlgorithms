@@ -1,6 +1,7 @@
 package lesson4;
 
 import java.util.Iterator;
+import java.util.ListIterator;
 
 public class MyLinkedList<T> implements Iterable<T>{
     private Node first;
@@ -8,8 +9,8 @@ public class MyLinkedList<T> implements Iterable<T>{
     private int size;
 
     @Override
-    public Iterator<T> iterator() {
-        return new Iter();
+    public ListIterator<T> iterator() {
+        return new ListIter();
     }
 
     public MyLinkedList() {
@@ -37,8 +38,61 @@ public class MyLinkedList<T> implements Iterable<T>{
             this.previous = previous;
         }
     }
+    //Задание 1. Добавить ListIterator, реализовать некоторые из его методов.
+    private class ListIter implements ListIterator<T>{
+        Node current = new Node(null, first);
+        int index = -1;
+        @Override
+        public boolean hasNext() {
+            return current.next != null;
+        }
 
-    private class Iter implements Iterator<T>{
+        @Override
+        public T next() {
+            index++;
+            current = current.next;
+            return current.value;
+        }
+
+        @Override
+        public boolean hasPrevious() {
+            return current.previous != null;
+        }
+
+        @Override
+        public T previous() {
+            index--;
+            current = current.previous;
+            return current.value;
+        }
+
+        @Override
+        public int nextIndex() {
+            return index + 1;
+        }
+
+        @Override
+        public int previousIndex() {
+            return index;
+        }
+
+        @Override
+        public void remove() {
+
+        }
+
+        @Override
+        public void set(T t) {
+
+        }
+
+        @Override
+        public void add(T t) {
+
+        }
+    }
+
+    /*private class Iter implements Iterator<T>{
         Node current = new Node(null, first);
         @Override
         public boolean hasNext() {
@@ -50,7 +104,7 @@ public class MyLinkedList<T> implements Iterable<T>{
             current = current.next;
             return current.value;
         }
-    }
+    } */
 
     public void insertFirst(T item) {
         Node newNode = new Node(item, first);
