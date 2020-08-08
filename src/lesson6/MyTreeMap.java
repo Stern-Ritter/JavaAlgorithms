@@ -1,6 +1,7 @@
 package lesson6;
 
 import java.util.NoSuchElementException;
+import java.util.Random;
 
 public class MyTreeMap<Key extends Comparable<Key>, Value> {
     private Node root;
@@ -11,11 +12,13 @@ public class MyTreeMap<Key extends Comparable<Key>, Value> {
         Node left;
         Node right;
         int size;
+        int height;
 
         public Node(Key key, Value value) {
             this.key = key;
             this.value = value;
             this.size = 1;
+            this.height = 0;
         }
     }
 
@@ -28,6 +31,17 @@ public class MyTreeMap<Key extends Comparable<Key>, Value> {
             return 0;
         }
         return node.size;
+    }
+
+    public int height(){
+        return height(root);
+    }
+
+    private int height(Node node){
+        if (node == null){
+            return 0;
+        }
+        return node.height;
     }
 
     public boolean isEmpty() {
@@ -89,6 +103,9 @@ public class MyTreeMap<Key extends Comparable<Key>, Value> {
             node.right = put(node.right, key, value);
         }
         node.size = size(node.left) + size(node.right) + 1;
+        if (node.left != null || node.right != null) {
+            node.height = Math.max(height(node.left), height(node.right)) + 1;
+        }
         return node;
     }
 
@@ -151,6 +168,17 @@ public class MyTreeMap<Key extends Comparable<Key>, Value> {
         return node;
     }
 
+    public boolean isBalanced(){
+        return isBalanced(root);
+    }
+    private boolean isBalanced(Node node){
+        if (node == null) {
+            return true;
+        } else {
+            return isBalanced(node.left) && isBalanced(node.right) && Math.abs(height(node.left) - height(node.right)) <= 1;
+        }
+    }
+
     @Override
     public String toString() {
         return toString(root);
@@ -163,6 +191,16 @@ public class MyTreeMap<Key extends Comparable<Key>, Value> {
         return toString(node.left) + " " +
                 node.key + " = " + node.value +
                 " " + toString(node.right);
+    }
+
+    public static MyTreeMap<Integer,Integer> genTree (int lvl, int min, int max){
+        MyTreeMap<Integer, Integer> mp = new MyTreeMap<>();
+        Random rand = new Random();
+        while (mp.height() < 6){
+            int num = rand.nextInt(max - min)  + min;
+            mp.put(num, num);
+        }
+        return mp;
     }
 }
 
