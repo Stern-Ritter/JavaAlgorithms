@@ -73,6 +73,17 @@ public class ChainingHashMap<Key, Value> {
         return null;
     }
 
+    //Задание 1. Создать метод удаления в классе метод цепочек.
+    public void delete(Key key) {
+        checkKeyNotNull(key);
+        int i = hash(key);
+        for (Node node : st[i]) {
+            if (key.equals(node.key)) {
+                st[i].remove(node);
+                return;
+            }
+        }
+    }
 
     @Override
     public String toString() {
